@@ -2,7 +2,7 @@ name: shell commands
 on: [push]
 jobs:
   helloworld-job:
-    runs-on: macos-latest
+    runs-on: windows-latest
     steps:
       - name: echo step
         run: echo "helloworld"
@@ -11,3 +11,7 @@ jobs:
           node -v
           npm -v
           date
+      - name: windows commands
+        run: |
+          ipconfig
+        shell: cmd

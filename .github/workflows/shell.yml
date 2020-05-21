@@ -1,6 +1,13 @@
 name: shell commands
 on: [push]
 jobs:
+  checkout-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repo
+        uses: actions/checkout@v2
+        with:
+          ref: master
   mac-jobs:
     runs-on: macos-latest
     steps:
@@ -30,5 +37,6 @@ jobs:
           who-to-greet: pusa
       - name: get a value from above step
         run: echo "${{ steps.js-action.outputs.time }}"
+      
 
 

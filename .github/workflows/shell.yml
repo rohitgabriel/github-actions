@@ -1,0 +1,13 @@
+name: shell commands
+on: [push]
+jobs:
+  helloworld-job:
+    runs-on: macos-latest
+    steps:
+      - name: echo step
+        run: echo "helloworld"
+      - name: multiline step
+        run: |
+          node -v
+          npm -v
+          date

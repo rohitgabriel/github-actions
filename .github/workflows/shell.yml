@@ -1,5 +1,28 @@
 name: shell commands
-on: [push]
+on: 
+  # schedule:
+  #   - cron: "*/5 * * * *"
+  # You can call invoke this workflow api - need github roken with repo scope
+  # repository_dispatch:
+  #   types: 
+  #     - this_is_arbitrary
+  #     - execute
+  push:
+    branches:
+      - master
+      - "actions-practice-*/*"
+      - "actions-practice-*/**"
+      - "!actions-practice-*/rogue"
+    tags:
+      - "v1*"
+    paths-ignore:
+      - 'rogue.js'
+  pull_request:
+    types: 
+      - opened
+      - synchronize
+      - closed
+      - reopened
 jobs:
   checkout-job:
     runs-on: ubuntu-latest
@@ -37,6 +60,3 @@ jobs:
           who-to-greet: pusa
       - name: get a value from above step
         run: echo "${{ steps.js-action.outputs.time }}"
-      
-
-

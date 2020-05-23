@@ -79,6 +79,7 @@ jobs:
       - name: Checkout git and add a incremental version file
         id: semantic
         run: |
+          git init
           git clone "https://$GITHUB_ACTOR:${{ secrets.gitrepo_practice }}@github.com/$GITHUB_REPOSITORY.git"
           git config --global user.email "bot@bot.com"
           git config --global user.name "bot"

@@ -24,11 +24,17 @@ on:
       - synchronize
       - closed
       - reopened
+env:
+  WORKFLOW_VAR: "At workflow level, variables are available to jobs and steps and others"
 jobs:
   checkout-job:
+    env:
+      JOB_VAR: "At job level, variables are avialable to the current job and steps with in"
     runs-on: ubuntu-latest
     steps:
       - name: checkout git repo
+        env:
+          STEP_VAR: "At step level, variables are avialable only to the current step"
         uses: actions/checkout@v2
         with:
           ref: master
@@ -36,7 +42,11 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: echo step
-        run: echo "helloworld"
+        run: |
+          echo "helloworld"
+          echo "WORKFLOW_VAR: ${WORKFLOW_VAR}"
+          echo "JOB_VAR: ${JOB_VAR}"
+          echo "STEP_VAR: ${STEP_VAR}"
       - name: multiline step
         run: |
           node -v
@@ -60,4 +70,4 @@ jobs:
         with: 
           who-to-greet: pusa
       - name: get a value from above step
-        run: echo "${{ steps.js-action.outputs.time }}"
+        run: echo "${ steps.js-action.outputs.time }"

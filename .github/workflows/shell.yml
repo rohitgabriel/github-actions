@@ -88,7 +88,7 @@ jobs:
           git checkout $branch_name
           git branch --set-upstream-to=origin/$branch_name
           git pull
-          echo feature-$RANDOM > version.txt
+          echo feature-RANDOM > version.txt
           git add *
           git commit -m "version updated in feature branch"
           git push

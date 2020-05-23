@@ -45,8 +45,8 @@ jobs:
         run: |
           echo "helloworld"
           echo "WORKFLOW_VAR: ${WORKFLOW_VAR}"
-          echo "JOB_VAR: ${JOB_VAR}"
-          echo "STEP_VAR: ${STEP_VAR}"
+          echo "JOB_VAR (wont work here): ${JOB_VAR}"
+          echo "STEP_VAR (wont work here): ${STEP_VAR}"
       - name: multiline step
         run: |
           node -v
@@ -70,4 +70,23 @@ jobs:
         with: 
           who-to-greet: pusa
       - name: get a value from above step
-        run: echo "${ steps.js-action.outputs.time }"
+        run: echo "${{ steps.js-action.outputs.time }}"
+      - name: get secret var
+        run: echo "${{ secrets.TEST }}"
+  semantic-version-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git and add a incremental version file
+        id: semantic
+        run: |
+          git clone "https://$GITHUB_ACTOR:${{ secrets.gitrepo_practice }}@github.com/$GITHUB_REPOSITORY.git"
+          git config --global user.email "bot@bot.com"
+          git config --global user.name "bot"
+          git checkout $GITHUB_REF
+          echo feature-$RANDOM > version.txt
+          git add *
+          git commit -m "version updated in feature branch"
+          git branch --set-upstream-to=origin/$GITHUB_REF
+          git push
+
+          

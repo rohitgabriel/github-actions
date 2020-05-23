@@ -80,14 +80,16 @@ jobs:
         id: semantic
         run: |
           git init
-          git clone "https://$GITHUB_ACTOR:${{ secrets.gitrepo_practice }}@github.com/$GITHUB_REPOSITORY.git"
+          git remote add origin "https://$GITHUB_ACTOR:${{ secrets.gitrepo_practice }}@github.com/$GITHUB_REPOSITORY.git"
           git config --global user.email "bot@bot.com"
           git config --global user.name "bot"
+          git fetch
           git checkout $GITHUB_REF
+          git branch --set-upstream-to=origin/$GITHUB_REF
+          git pull
           echo feature-$RANDOM > version.txt
           git add *
           git commit -m "version updated in feature branch"
-          git branch --set-upstream-to=origin/$GITHUB_REF
           git push
 
           

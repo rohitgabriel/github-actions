@@ -85,10 +85,8 @@ jobs:
           git config --global user.name "bot"
           git fetch
           branch_name=`echo $GITHUB_REF | awk -F "/" '{print $3}'`
-          echo $branch_name
-          echo $GITHUB_REF | awk -F "/" '{print $3}'
           git checkout $branch_name
-          git branch --set-upstream-to=origin/$GITHUB_REF
+          git branch --set-upstream-to=origin/$branch_name
           git pull
           echo feature-$RANDOM > version.txt
           git add *

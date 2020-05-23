@@ -84,7 +84,10 @@ jobs:
           git config --global user.email "bot@bot.com"
           git config --global user.name "bot"
           git fetch
-          git checkout $GITHUB_REF
+          branch_name=${echo $GITHUB_REF | awk -F "/" '{print $2}'}
+          echo $branch_name
+          echo $GITHUB_REF | awk -F "/" '{print $2}'
+          git checkout $branch_name
           git branch --set-upstream-to=origin/$GITHUB_REF
           git pull
           echo feature-$RANDOM > version.txt

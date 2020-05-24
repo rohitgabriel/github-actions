@@ -87,7 +87,7 @@ jobs:
         with: 
           who-to-greet: pusa
       - name: Add a comment
-        id: github pull req comment
+        id: github_pull_req_comment
         env:
           STDOUT: "```${{ steps.js-action.outputs.stdout }}```"
         uses: actions/github-script@0.9.0

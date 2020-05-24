@@ -59,7 +59,7 @@ jobs:
     if: github.event_name == 'push'
     needs: ["mac-jobs"]
     steps:
-      - name: windows commands
+      - name: windows_commands
         run: |
           ipconfig
           dir
@@ -80,7 +80,7 @@ jobs:
   pull-request-comment-job:
     runs-on: ubuntu-18.04
     env:
-        STDOUT: "```${{ steps.plan.outputs.stdout }}```"
+        STDOUT: "```${{ steps.js-action.outputs.stdout }}```"
     if: github.event_name == 'pull_request'
     steps: 
       - name: Add a comment

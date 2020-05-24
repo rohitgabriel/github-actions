@@ -100,9 +100,6 @@ jobs:
               repo: context.repo.repo,
               body: process.env.STDOUT
             })
-
-
-
   # semantic-version-job:
   #   runs-on: ubuntu-latest
   #   steps:

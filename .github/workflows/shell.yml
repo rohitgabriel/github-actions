@@ -40,6 +40,7 @@ jobs:
           ref: master
   mac-jobs:
     runs-on: macos-latest
+    if: always()
     steps:
       - name: echo step
         run: |
@@ -53,7 +54,8 @@ jobs:
           npm -v
           date
   windows-job:
-    runs-on: windows-latest 
+    runs-on: windows-latest
+    if: github.event_name == "push"
     needs: ["mac-jobs"]
     steps:
       - name: windows commands
@@ -63,6 +65,7 @@ jobs:
         shell: cmd
   actions-job:
     runs-on: ubuntu-latest
+    if: github.event_name == "pull_request"
     steps:
       - name: run a third party action
         id: js-action

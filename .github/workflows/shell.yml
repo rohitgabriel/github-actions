@@ -31,6 +31,7 @@ jobs:
     env:
       JOB_VAR: "At job level, variables are avialable to the current job and steps with in"
     runs-on: ubuntu-latest
+    if: contains('Hello world', 'llo')
     steps:
       - name: checkout git repo
         env:
@@ -55,7 +56,7 @@ jobs:
           date
   windows-job:
     runs-on: windows-latest
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     needs: ["mac-jobs"]
     steps:
       - name: windows commands
@@ -65,7 +66,7 @@ jobs:
         shell: cmd
   actions-job:
     runs-on: ubuntu-latest
-    if: github.event_name == "pull_request"
+    if: github.event_name == 'pull_request'
     steps:
       - name: run a third party action
         id: js-action

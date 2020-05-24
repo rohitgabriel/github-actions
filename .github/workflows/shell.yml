@@ -83,6 +83,11 @@ jobs:
         STDOUT: "```${{ steps.js-action.outputs.stdout }}```"
     if: github.event_name == 'pull_request'
     steps: 
+      - name: run a third party action
+        id: js-action
+        uses: actions/hello-world-javascript-action@v1
+        with: 
+          who-to-greet: pusa
       - name: Add a comment
         id: github pull req comment
         uses: actions/github-script@0.9.0

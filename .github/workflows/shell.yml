@@ -79,8 +79,6 @@ jobs:
         run: echo "${{ secrets.TEST }}"
   pull-request-comment-job:
     runs-on: ubuntu-18.04
-    env:
-        STDOUT: "```${{ steps.js-action.outputs.stdout }}```"
     if: github.event_name == 'pull_request'
     steps: 
       - name: run a third party action
@@ -90,6 +88,8 @@ jobs:
           who-to-greet: pusa
       - name: Add a comment
         id: github pull req comment
+        env:
+          STDOUT: "```${{ steps.js-action.outputs.stdout }}```"
         uses: actions/github-script@0.9.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

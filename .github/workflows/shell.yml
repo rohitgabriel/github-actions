@@ -42,6 +42,7 @@ jobs:
   mac-jobs:
     runs-on: macos-latest
     if: always()
+    timeout-minutes: 10
     steps:
       - name: echo step
         run: |
@@ -50,6 +51,7 @@ jobs:
           echo "JOB_VAR (wont work here): ${JOB_VAR}"
           echo "STEP_VAR (wont work here): ${STEP_VAR}"
       - name: multiline step
+        continue-on-error: true
         run: |
           node -v
           npm -v
@@ -57,7 +59,7 @@ jobs:
   windows-job:
     runs-on: windows-latest
     if: github.event_name == 'push'
-    needs: ["mac-jobs"]
+    needs: ["mac-jobs", "checkout-job"]
     steps:
       - name: windows_commands
         run: |
@@ -80,6 +82,7 @@ jobs:
   pull-request-comment-job:
     runs-on: ubuntu-18.04
     if: github.event_name == 'pull_request'
+    needs: ["actions-job"]
     steps: 
       - name: run a third party action
         id: js-action

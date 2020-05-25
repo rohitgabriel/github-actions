@@ -104,16 +104,16 @@ jobs:
               repo: context.repo.repo,
               body: process.env.STDOUT
             })
-    docker-job:
-      runs-on: ubuntu-latest
-      container: 
-        image: node:13.5.0-alpine3.10
-      steps:
-        - name: get node version inside container
-          id: docker-node
-          run: |
-            node -v
-            cat /etc/os-release
+  docker-job:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:13.5.0-alpine3.10
+    steps:
+      - name: get node version inside container
+        id: docker-node
+        run: |
+          node -v
+          cat /etc/os-release
   # semantic-version-job:
   #   runs-on: ubuntu-latest
   #   steps:

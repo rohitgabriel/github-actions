@@ -14,7 +14,7 @@ on:
       - "actions-practice-*/*"
       - "actions-practice-*/**"
       - "!actions-practice-*/roguebranch"
-      - "another-branch"
+      - "another_branch"
     tags:
       - "v1*"
     paths-ignore:
